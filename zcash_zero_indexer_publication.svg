@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1760"
+     height="980"
+     viewBox="0 0 1760 980"
+     role="img"
+     aria-labelledby="svg-title svg-desc">
+  <title id="svg-title">Zero-indexer transaction publication</title>
+  <desc id="svg-desc">Wallet TLS connections terminate at zero-indexer shims inside trusted execution environments. The shims connect to one hub, which publishes to the mempool. An auditor watches independently.</desc>
+
+  <defs>
+    <style>
+
+.canvas {
+    fill: #fbfcfe;
+}
+
+.title {
+    fill: #172033;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+                 BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.node-label {
+    fill: #172033;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+                 BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 16px;
+    font-weight: 650;
+    text-anchor: middle;
+    dominant-baseline: middle;
+}
+
+.small-label {
+    fill: #516078;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+                 BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.boundary-label {
+    fill: #667085;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+                 BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.node {
+    stroke-width: 2.2;
+    vector-effect: non-scaling-stroke;
+}
+
+.wallet {
+    fill: #f3efff;
+    stroke: #7456c7;
+}
+
+.indexer {
+    fill: #eaf2ff;
+    stroke: #4775bd;
+}
+
+.shim {
+    fill: #fff1d7;
+    stroke: #d88121;
+}
+
+.hub {
+    fill: #dcf7ec;
+    stroke: #218c69;
+}
+
+.cloud {
+    fill: #eaf4fa;
+    stroke: #4c7892;
+    stroke-width: 2.4;
+    vector-effect: non-scaling-stroke;
+}
+
+.edge {
+    fill: none;
+    stroke: #68758a;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+}
+
+.edge-local {
+    fill: none;
+    stroke: #8a94a6;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+}
+
+.edge-publication {
+    fill: none;
+    stroke: #218c69;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+}
+
+.organization {
+    fill: #f7f9fc;
+    fill-opacity: 0.72;
+    stroke: #a9b2c2;
+    stroke-width: 1.8;
+    stroke-dasharray: 8 6;
+    vector-effect: non-scaling-stroke;
+}
+
+.tee {
+    fill: #ebfaf4;
+    fill-opacity: 0.9;
+    stroke: #218c69;
+    stroke-width: 2.5;
+    vector-effect: non-scaling-stroke;
+}
+
+.tls-badge {
+    fill: #ffffff;
+    stroke: #7456c7;
+    stroke-width: 1.5;
+    vector-effect: non-scaling-stroke;
+}
+
+.tls-text {
+    fill: #5e43aa;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+                 BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 12px;
+    font-weight: 750;
+    text-anchor: middle;
+    dominant-baseline: middle;
+}
+
+.lock {
+    fill: none;
+    stroke: #218c69;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+}
+
+.auditor-label {
+    fill: #5f4b13;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+                 BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-anchor: middle;
+}
+
+.eye {
+    fill: #ffffff;
+    stroke: #b38a25;
+    stroke-width: 2.2;
+    vector-effect: non-scaling-stroke;
+}
+
+.pupil {
+    fill: #29303d;
+}
+
+.highlight {
+    fill: #ffffff;
+}
+
+    </style>
+
+    <marker id="arrow"
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="7"
+            markerHeight="7"
+            orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#68758a"/>
+    </marker>
+
+    <marker id="arrow-local"
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="7"
+            markerHeight="7"
+            orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8a94a6"/>
+    </marker>
+
+    <marker id="arrow-publication"
+            viewBox="0 0 10 10"
+            refX="9"
+            refY="5"
+            markerWidth="7"
+            markerHeight="7"
+            orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#218c69"/>
+    </marker>
+  </defs>
+
+  <rect class="canvas" x="0" y="0" width="1760" height="980"/>
+
+  <text x="880.0" y="52" class="title" text-anchor="middle">Zero-indexer transaction publication</text>
+  <g>
+    <rect class="organization"
+          x="350" y="60" width="760" height="240" rx="22"/>
+    <text class="boundary-label"
+          x="368" y="85">organization 1</text>
+  </g>
+  <g>
+    <rect class="tee"
+          x="450" y="102.0" width="320" height="156" rx="18"/>
+
+    <path class="lock"
+          d="M 470,130.0
+             V 123.0
+             C 470,112.0
+               486,112.0
+               486,123.0
+             V 130.0"/>
+
+    <rect x="467" y="129.0"
+          width="22" height="17" rx="3"
+          fill="#218c69"/>
+
+    <circle cx="478" cy="137.0"
+            r="2.3" fill="#ffffff"/>
+
+    <text class="small-label"
+          x="499" y="136.0">TEE</text>
+  </g>
+  <g>
+    <rect class="organization"
+          x="350" y="330" width="760" height="240" rx="22"/>
+    <text class="boundary-label"
+          x="368" y="355">organization 2</text>
+  </g>
+  <g>
+    <rect class="tee"
+          x="450" y="372.0" width="320" height="156" rx="18"/>
+
+    <path class="lock"
+          d="M 470,400.0
+             V 393.0
+             C 470,382.0
+               486,382.0
+               486,393.0
+             V 400.0"/>
+
+    <rect x="467" y="399.0"
+          width="22" height="17" rx="3"
+          fill="#218c69"/>
+
+    <circle cx="478" cy="407.0"
+            r="2.3" fill="#ffffff"/>
+
+    <text class="small-label"
+          x="499" y="406.0">TEE</text>
+  </g>
+  <g>
+    <rect class="organization"
+          x="350" y="600" width="760" height="240" rx="22"/>
+    <text class="boundary-label"
+          x="368" y="625">organization 3</text>
+  </g>
+  <g>
+    <rect class="tee"
+          x="450" y="642.0" width="320" height="156" rx="18"/>
+
+    <path class="lock"
+          d="M 470,670.0
+             V 663.0
+             C 470,652.0
+               486,652.0
+               486,663.0
+             V 670.0"/>
+
+    <rect x="467" y="669.0"
+          width="22" height="17" rx="3"
+          fill="#218c69"/>
+
+    <circle cx="478" cy="677.0"
+            r="2.3" fill="#ffffff"/>
+
+    <text class="small-label"
+          x="499" y="676.0">TEE</text>
+  </g>
+  <path class="edge" d="M 248,135 C 335,135 405,169 492,169" marker-end="url(#arrow)"/>
+  <g transform="translate(350 154.7)">
+    <rect class="tls-badge" x="-34" y="-13" width="68" height="26" rx="13"/>
+    <path d="M -21,-2 V -6
+             C -21,-12 -11,-12 -11,-6
+             V -2"
+          fill="none"
+          stroke="#7456c7"
+          stroke-width="1.5"
+          stroke-linecap="round"/>
+    <rect x="-22.5" y="-3"
+          width="13" height="10"
+          rx="2"
+          fill="#7456c7"/>
+    <text class="tls-text" x="11" y="1">TLS</text>
+  </g>
+  <path class="edge" d="M 248,225 C 335,225 405,191 492,191" marker-end="url(#arrow)"/>
+  <g transform="translate(350 205.3)">
+    <rect class="tls-badge" x="-34" y="-13" width="68" height="26" rx="13"/>
+    <path d="M -21,-2 V -6
+             C -21,-12 -11,-12 -11,-6
+             V -2"
+          fill="none"
+          stroke="#7456c7"
+          stroke-width="1.5"
+          stroke-linecap="round"/>
+    <rect x="-22.5" y="-3"
+          width="13" height="10"
+          rx="2"
+          fill="#7456c7"/>
+    <text class="tls-text" x="11" y="1">TLS</text>
+  </g>
+  <path class="edge" d="M 248,405 C 335,405 405,439 492,439" marker-end="url(#arrow)"/>
+  <g transform="translate(350 424.7)">
+    <rect class="tls-badge" x="-34" y="-13" width="68" height="26" rx="13"/>
+    <path d="M -21,-2 V -6
+             C -21,-12 -11,-12 -11,-6
+             V -2"
+          fill="none"
+          stroke="#7456c7"
+          stroke-width="1.5"
+          stroke-linecap="round"/>
+    <rect x="-22.5" y="-3"
+          width="13" height="10"
+          rx="2"
+          fill="#7456c7"/>
+    <text class="tls-text" x="11" y="1">TLS</text>
+  </g>
+  <path class="edge" d="M 248,495 C 335,495 405,461 492,461" marker-end="url(#arrow)"/>
+  <g transform="translate(350 475.3)">
+    <rect class="tls-badge" x="-34" y="-13" width="68" height="26" rx="13"/>
+    <path d="M -21,-2 V -6
+             C -21,-12 -11,-12 -11,-6
+             V -2"
+          fill="none"
+          stroke="#7456c7"
+          stroke-width="1.5"
+          stroke-linecap="round"/>
+    <rect x="-22.5" y="-3"
+          width="13" height="10"
+          rx="2"
+          fill="#7456c7"/>
+    <text class="tls-text" x="11" y="1">TLS</text>
+  </g>
+  <path class="edge" d="M 248,675 C 335,675 405,709 492,709" marker-end="url(#arrow)"/>
+  <g transform="translate(350 694.7)">
+    <rect class="tls-badge" x="-34" y="-13" width="68" height="26" rx="13"/>
+    <path d="M -21,-2 V -6
+             C -21,-12 -11,-12 -11,-6
+             V -2"
+          fill="none"
+          stroke="#7456c7"
+          stroke-width="1.5"
+          stroke-linecap="round"/>
+    <rect x="-22.5" y="-3"
+          width="13" height="10"
+          rx="2"
+          fill="#7456c7"/>
+    <text class="tls-text" x="11" y="1">TLS</text>
+  </g>
+  <path class="edge" d="M 248,765 C 335,765 405,731 492,731" marker-end="url(#arrow)"/>
+  <g transform="translate(350 745.3)">
+    <rect class="tls-badge" x="-34" y="-13" width="68" height="26" rx="13"/>
+    <path d="M -21,-2 V -6
+             C -21,-12 -11,-12 -11,-6
+             V -2"
+          fill="none"
+          stroke="#7456c7"
+          stroke-width="1.5"
+          stroke-linecap="round"/>
+    <rect x="-22.5" y="-3"
+          width="13" height="10"
+          rx="2"
+          fill="#7456c7"/>
+    <text class="tls-text" x="11" y="1">TLS</text>
+  </g>
+  <path class="edge-local" d="M 742,192 C 790,195 805,226 806,231" marker-end="url(#arrow-local)"/>
+  <path class="edge-local" d="M 742,462 C 790,465 805,496 806,501" marker-end="url(#arrow-local)"/>
+  <path class="edge-local" d="M 742,732 C 790,735 805,766 806,771" marker-end="url(#arrow-local)"/>
+  <path class="edge-publication" d="M 742,170 H 1080 C 1165,170 1175,405 1236,425" marker-end="url(#arrow-publication)"/>
+  <path class="edge-publication" d="M 742,440 H 1080 C 1150,440 1190,450 1235,450" marker-end="url(#arrow-publication)"/>
+  <path class="edge-publication" d="M 742,710 H 1080 C 1165,710 1175,495 1236,475" marker-end="url(#arrow-publication)"/>
+  <path class="edge-publication" d="M 1465,450 C 1500,450 1518,450 1542,450" marker-end="url(#arrow-publication)"/>
+  <g>
+    <ellipse class="node wallet"
+             cx="160" cy="135" rx="88" ry="34"/>
+    <text class="node-label" x="160" y="135">wallet</text>
+  </g>
+  <g>
+    <ellipse class="node wallet"
+             cx="160" cy="225" rx="88" ry="34"/>
+    <text class="node-label" x="160" y="225">wallet</text>
+  </g>
+  <g>
+    <ellipse class="node shim"
+             cx="620" cy="180" rx="125" ry="42"/>
+    <text class="node-label" x="620" y="180">zero-indexer-shim</text>
+  </g>
+  <g>
+    <ellipse class="node indexer"
+             cx="920" cy="235" rx="105" ry="40"/>
+    <text class="node-label" x="920" y="235">indexer</text>
+  </g>
+  <g>
+    <ellipse class="node wallet"
+             cx="160" cy="405" rx="88" ry="34"/>
+    <text class="node-label" x="160" y="405">wallet</text>
+  </g>
+  <g>
+    <ellipse class="node wallet"
+             cx="160" cy="495" rx="88" ry="34"/>
+    <text class="node-label" x="160" y="495">wallet</text>
+  </g>
+  <g>
+    <ellipse class="node shim"
+             cx="620" cy="450" rx="125" ry="42"/>
+    <text class="node-label" x="620" y="450">zero-indexer-shim</text>
+  </g>
+  <g>
+    <ellipse class="node indexer"
+             cx="920" cy="505" rx="105" ry="40"/>
+    <text class="node-label" x="920" y="505">indexer</text>
+  </g>
+  <g>
+    <ellipse class="node wallet"
+             cx="160" cy="675" rx="88" ry="34"/>
+    <text class="node-label" x="160" y="675">wallet</text>
+  </g>
+  <g>
+    <ellipse class="node wallet"
+             cx="160" cy="765" rx="88" ry="34"/>
+    <text class="node-label" x="160" y="765">wallet</text>
+  </g>
+  <g>
+    <ellipse class="node shim"
+             cx="620" cy="720" rx="125" ry="42"/>
+    <text class="node-label" x="620" y="720">zero-indexer-shim</text>
+  </g>
+  <g>
+    <ellipse class="node indexer"
+             cx="920" cy="775" rx="105" ry="40"/>
+    <text class="node-label" x="920" y="775">indexer</text>
+  </g>
+  <g>
+    <ellipse class="node hub"
+             cx="1355" cy="450" rx="110" ry="48"/>
+    <text class="node-label" x="1355" y="450">zero-indexer-hub</text>
+  </g>
+  <g>
+    <path class="cloud" d="M 1581.2,514.0 C 1544.3,514.0 1534.1,486.0 1552.5,458.0 C 1538.2,424.0 1566.9,396.0 1597.7,408.0 C 1610.0,366.0 1661.2,364.0 1677.6,406.0 C 1714.5,398.0 1730.9,430.0 1716.5,460.0 C 1739.1,488.0 1712.5,516.0 1683.8,512.0 L 1581.2,514.0 Z"/>
+    <text class="node-label"
+          x="1636.6" y="462.0">mempool</text>
+  </g>
+  <g>
+    <ellipse class="eye"
+             cx="1326" cy="755"
+             rx="26" ry="38"
+             transform="rotate(-5 1326 755)"/>
+
+    <ellipse class="eye"
+             cx="1384" cy="755"
+             rx="26" ry="38"
+             transform="rotate(5 1384 755)"/>
+
+    <circle class="pupil" cx="1334" cy="758" r="10"/>
+    <circle class="pupil" cx="1392" cy="758" r="10"/>
+
+    <circle class="highlight" cx="1338" cy="754" r="3"/>
+    <circle class="highlight" cx="1396" cy="754" r="3"/>
+
+    <text class="auditor-label"
+          x="1355" y="822">zero-indexer-auditor</text>
+  </g>
+</svg>
