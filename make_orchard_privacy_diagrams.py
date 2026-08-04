@@ -473,9 +473,47 @@ def make_current_diagram():
 
 
 def make_zero_indexer_diagram():
-    width = 1760
-    height = 980
+    width = 1780
+    height = 900
     elements = []
+
+    # Additional styling local to this diagram.
+    elements.append("""
+  <defs>
+    <filter id="node-shadow"
+            x="-20%" y="-25%" width="140%" height="160%">
+      <feDropShadow dx="0"
+                    dy="4"
+                    stdDeviation="5"
+                    flood-color="#172033"
+                    flood-opacity="0.10"/>
+    </filter>
+
+    <filter id="panel-shadow"
+            x="-10%" y="-15%" width="120%" height="140%">
+      <feDropShadow dx="0"
+                    dy="3"
+                    stdDeviation="6"
+                    flood-color="#172033"
+                    flood-opacity="0.06"/>
+    </filter>
+
+    <style>
+      .node,
+      .cloud {
+          filter: url(#node-shadow);
+      }
+
+      .tee {
+          filter: url(#panel-shadow);
+      }
+
+      .continuation-dot {
+          fill: #8793a8;
+      }
+    </style>
+  </defs>
+""")
 
     elements.append(
         text(
@@ -487,50 +525,82 @@ def make_zero_indexer_diagram():
         )
     )
 
-    rows = [180, 450, 720]
+    # ------------------------------------------------------------------
+    # Layout
+    # ------------------------------------------------------------------
 
-    wallet_x = 160
-    shim_x = 620
-    indexer_x = 920
+    wallet_x = 150
+    shim_x = 650
+    indexer_x = 930
 
-    organization_x = 350
-    organization_width = 760
-    organization_height = 240
+    organization_x = 430
+    organization_width = 680
+    organization_height = 275
 
-    shim_tee_x = 450
-    shim_tee_width = 320
-    shim_tee_height = 156
+    tee_x = 470
+    tee_width = 340
+    tee_height = 180
 
-    hub_x = 1355
-    hub_y = 450
+    organizations = [
+        {
+            "number": 1,
+            "boundary_y": 90,
+            "tee_y": 130,
+            "wallet_ys": (170, 270),
+            "shim_y": 220,
+            # The upper indexer sends its direct connection through
+            # the dedicated lane above the hub.
+            "indexer_y": 150,
+        },
+        {
+            "number": 2,
+            "boundary_y": 405,
+            "tee_y": 450,
+            "wallet_ys": (490, 590),
+            "shim_y": 540,
+            # The lower indexer sends its direct connection through
+            # the dedicated lane below the hub.
+            "indexer_y": 610,
+        },
+    ]
 
-    hub_tee_x = 1200
-    hub_tee_y = 350
+    hub_x = 1330
+    hub_y = 420
+    hub_tee_x = 1180
+    hub_tee_y = 270
     hub_tee_width = 300
-    hub_tee_height = 200
+    hub_tee_height = 300
 
-    # Organizational boundaries and shim TEE enclaves.
-    for number, row_y in enumerate(rows, start=1):
+    mempool_x = 1540
+    mempool_y = 320
+    mempool_width = 210
+    mempool_height = 210
+
+    # ------------------------------------------------------------------
+    # Background boundaries
+    # ------------------------------------------------------------------
+
+    for organization in organizations:
         elements.append(
             organization_boundary(
                 organization_x,
-                row_y - 120,
+                organization["boundary_y"],
                 organization_width,
                 organization_height,
-                f"organization {number}",
+                f'organisation {organization["number"]}',
             )
         )
 
         elements.append(
             tee_boundary(
-                shim_tee_x,
-                row_y - shim_tee_height / 2,
-                shim_tee_width,
-                shim_tee_height,
+                tee_x,
+                organization["tee_y"],
+                tee_width,
+                tee_height,
             )
         )
 
-    # Locked TEE enclave containing the shared hub.
+    # The shared hub is also enclosed in a locked TEE.
     elements.append(
         tee_boundary(
             hub_tee_x,
@@ -540,114 +610,137 @@ def make_zero_indexer_diagram():
         )
     )
 
-    # Wallet-to-shim TLS connections. Each TLS endpoint is inside a TEE.
-    for row_y in rows:
-        wallet_ys = [row_y - 45, row_y + 45]
-        target_ys = [row_y - 11, row_y + 11]
+    # ------------------------------------------------------------------
+    # Wallet-to-shim TLS connections
+    # ------------------------------------------------------------------
 
-        for wallet_y, target_y in zip(wallet_ys, target_ys):
-            path = (
-                f"M 248,{wallet_y} "
-                f"C 335,{wallet_y} 405,{target_y} 492,{target_y}"
+    for organization in organizations:
+        shim_y = organization["shim_y"]
+        wallet_ys = organization["wallet_ys"]
+        shim_target_ys = (shim_y - 15, shim_y + 15)
+
+        for wallet_y, target_y in zip(
+            wallet_ys,
+            shim_target_ys,
+        ):
+            elements.append(
+                edge(
+                    f"M 245,{wallet_y} "
+                    f"C 335,{wallet_y} "
+                    f"405,{target_y} "
+                    f"522,{target_y}"
+                )
             )
-            elements.append(edge(path))
 
-            badge_x = 350
-            badge_y = wallet_y + (target_y - wallet_y) * 0.58
-            elements.append(tls_badge(badge_x, round(badge_y, 1)))
-
-    # Shim-to-local-indexer connections.
-    for row_y in rows:
-        path = (
-            f"M 742,{row_y + 12} "
-            f"C 790,{row_y + 15} "
-            f"805,{row_y + 46} "
-            f"806,{row_y + 51}"
-        )
-        elements.append(
-            edge(
-                path,
-                css_class="edge-local",
-                marker="arrow-local",
+            badge_y = wallet_y + 0.47 * (target_y - wallet_y)
+            elements.append(
+                tls_badge(
+                    365,
+                    round(badge_y, 1),
+                )
             )
-        )
 
-    # Preserve the direct indexer-to-mempool publication paths.
-    # These are routed around the hub's TEE boundary.
-    direct_indexer_paths = [
-        (
-            "M 1025,235 "
-            "C 1190,235 1380,285 1510,330 "
-            "L 1572,404"
-        ),
-        (
-            "M 1025,505 "
-            "C 1100,505 1125,610 1200,625 "
-            "H 1440 "
-            "C 1500,625 1515,520 1548,465"
-        ),
-        (
-            "M 1025,775 "
-            "C 1220,775 1410,665 1510,570 "
-            "L 1550,512"
-        ),
-    ]
+    # ------------------------------------------------------------------
+    # Shim-to-local-indexer connections
+    # ------------------------------------------------------------------
 
-    for path in direct_indexer_paths:
-        elements.append(
-            edge(
-                path,
-                css_class="edge",
-                marker="arrow",
-            )
-        )
-
-    # Every shim also connects to the single hub inside its TEE.
-    shim_to_hub_paths = [
-        (
-            f"M 742,{rows[0] - 10} "
-            f"H 1080 "
-            f"C 1165,{rows[0] - 10} 1175,405 1236,425"
-        ),
-        (
-            f"M 742,{rows[1] - 10} "
-            f"H 1080 "
-            f"C 1150,{rows[1] - 10} 1190,450 1235,450"
-        ),
-        (
-            f"M 742,{rows[2] - 10} "
-            f"H 1080 "
-            f"C 1165,{rows[2] - 10} 1175,495 1236,475"
-        ),
-    ]
-
-    for path in shim_to_hub_paths:
-        elements.append(
-            edge(
-                path,
-                css_class="edge-publication",
-                marker="arrow-publication",
-            )
-        )
-
-    # Hub-to-mempool publication path exits the hub's TEE.
+    # Organization 1: indexer is above and to the right of its shim.
     elements.append(
         edge(
-            "M 1465,450 C 1500,450 1518,450 1542,450",
+            "M 770,198 "
+            "C 795,188 807,166 829,158",
+            css_class="edge-local",
+            marker="arrow-local",
+        )
+    )
+
+    # Organization 2: indexer is below and to the right of its shim.
+    elements.append(
+        edge(
+            "M 770,562 "
+            "C 795,573 807,599 829,607",
+            css_class="edge-local",
+            marker="arrow-local",
+        )
+    )
+
+    # ------------------------------------------------------------------
+    # Shim-to-hub connections
+    #
+    # These approach separate points on the left side of the hub.
+    # ------------------------------------------------------------------
+
+    elements.append(
+        edge(
+            "M 780,220 "
+            "C 935,220 1060,255 1145,342 "
+            "C 1170,368 1192,387 1218,395",
             css_class="edge-publication",
             marker="arrow-publication",
         )
     )
 
-    # Wallets, shims, and local indexers.
-    for row_y in rows:
-        for wallet_y in (row_y - 45, row_y + 45):
+    elements.append(
+        edge(
+            "M 780,540 "
+            "C 935,540 1060,515 1145,483 "
+            "C 1172,473 1193,453 1218,445",
+            css_class="edge-publication",
+            marker="arrow-publication",
+        )
+    )
+
+    # ------------------------------------------------------------------
+    # Direct indexer-to-mempool connections
+    #
+    # The first uses an upper routing lane. The second uses a lower
+    # routing lane. Both remain outside the hub TEE.
+    # ------------------------------------------------------------------
+
+    elements.append(
+        edge(
+            "M 1035,150 "
+            "C 1100,150 1120,82 1210,82 "
+            "H 1445 "
+            "C 1510,82 1542,275 1609,381",
+            css_class="edge",
+            marker="arrow",
+        )
+    )
+
+    elements.append(
+        edge(
+            "M 1035,610 "
+            "C 1100,610 1120,830 1210,830 "
+            "H 1445 "
+            "C 1510,830 1542,585 1592,490",
+            css_class="edge",
+            marker="arrow",
+        )
+    )
+
+    # Hub-to-mempool publication.
+    elements.append(
+        edge(
+            "M 1445,420 "
+            "C 1490,420 1525,428 1563,433",
+            css_class="edge-publication",
+            marker="arrow-publication",
+        )
+    )
+
+    # ------------------------------------------------------------------
+    # Foreground nodes
+    # ------------------------------------------------------------------
+
+    for organization in organizations:
+        for wallet_y in organization["wallet_ys"]:
             elements.append(
                 ellipse_node(
                     wallet_x,
                     wallet_y,
-                    88,
-                    34,
+                    95,
+                    36,
                     "wallet",
                     "wallet",
                 )
@@ -656,9 +749,9 @@ def make_zero_indexer_diagram():
         elements.append(
             ellipse_node(
                 shim_x,
-                row_y,
-                125,
-                42,
+                organization["shim_y"],
+                130,
+                44,
                 "zero-indexer-shim",
                 "shim",
             )
@@ -667,7 +760,7 @@ def make_zero_indexer_diagram():
         elements.append(
             ellipse_node(
                 indexer_x,
-                row_y + 55,
+                organization["indexer_y"],
                 105,
                 40,
                 "indexer",
@@ -675,31 +768,61 @@ def make_zero_indexer_diagram():
             )
         )
 
-    # Shared hub, enclosed by the hub TEE drawn earlier.
     elements.append(
         ellipse_node(
             hub_x,
             hub_y,
-            110,
+            115,
             48,
             "zero-indexer-hub",
             "hub",
         )
     )
 
-    elements.append(cloud(1530, 350, 205, 200))
+    elements.append(
+        cloud(
+            mempool_x,
+            mempool_y,
+            mempool_width,
+            mempool_height,
+        )
+    )
 
-    # Independent, disconnected auditor.
-    elements.append(auditor_eyes(1355, 755))
+    # ------------------------------------------------------------------
+    # Continuation marks
+    #
+    # The left column indicates more wallets. The right column indicates
+    # more organization/indexer instances without drawing another group.
+    # ------------------------------------------------------------------
+
+    for continuation_x in (wallet_x, indexer_x):
+        elements.append(
+            f"""  <g aria-label="more">
+    <circle class="continuation-dot"
+            cx="{continuation_x}" cy="735" r="4.5"/>
+    <circle class="continuation-dot"
+            cx="{continuation_x}" cy="757" r="4.5"/>
+    <circle class="continuation-dot"
+            cx="{continuation_x}" cy="779" r="4.5"/>
+  </g>"""
+        )
+
+    # Independent and intentionally disconnected auditor.
+    elements.append(
+        auditor_eyes(
+            1325,
+            700,
+        )
+    )
 
     return svg_document(
         width,
         height,
         "Zero-indexer transaction publication",
         "Wallet TLS connections terminate at zero-indexer shims inside "
-        "trusted execution environments. The shims connect to a hub in "
-        "another trusted execution environment. Both the hub and the "
-        "indexers publish to the mempool.",
+        "trusted execution environments. Shims connect to a shared hub "
+        "inside another trusted execution environment. Indexers retain "
+        "their direct connections to the mempool.",
         elements,
     )
 

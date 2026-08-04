@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg"
-     width="1760"
-     height="980"
-     viewBox="0 0 1760 980"
+     width="1780"
+     height="900"
+     viewBox="0 0 1780 900"
      role="img"
      aria-labelledby="svg-title svg-desc">
   <title id="svg-title">Zero-indexer transaction publication</title>
-  <desc id="svg-desc">Wallet TLS connections terminate at zero-indexer shims inside trusted execution environments. The shims connect to a hub in another trusted execution environment. Both the hub and the indexers publish to the mempool.</desc>
+  <desc id="svg-desc">Wallet TLS connections terminate at zero-indexer shims inside trusted execution environments. Shims connect to a shared hub inside another trusted execution environment. Indexers retain their direct connections to the mempool.</desc>
 
   <defs>
     <style>
@@ -208,117 +208,125 @@
     </marker>
   </defs>
 
-  <rect class="canvas" x="0" y="0" width="1760" height="980"/>
+  <rect class="canvas" x="0" y="0" width="1780" height="900"/>
 
-  <text x="880.0" y="52" class="title" text-anchor="middle">Zero-indexer transaction publication</text>
+
+  <defs>
+    <filter id="node-shadow"
+            x="-20%" y="-25%" width="140%" height="160%">
+      <feDropShadow dx="0"
+                    dy="4"
+                    stdDeviation="5"
+                    flood-color="#172033"
+                    flood-opacity="0.10"/>
+    </filter>
+
+    <filter id="panel-shadow"
+            x="-10%" y="-15%" width="120%" height="140%">
+      <feDropShadow dx="0"
+                    dy="3"
+                    stdDeviation="6"
+                    flood-color="#172033"
+                    flood-opacity="0.06"/>
+    </filter>
+
+    <style>
+      .node,
+      .cloud {
+          filter: url(#node-shadow);
+      }
+
+      .tee {
+          filter: url(#panel-shadow);
+      }
+
+      .continuation-dot {
+          fill: #8793a8;
+      }
+    </style>
+  </defs>
+
+  <text x="890.0" y="52" class="title" text-anchor="middle">Zero-indexer transaction publication</text>
   <g>
     <rect class="organization"
-          x="350" y="60" width="760" height="240" rx="22"/>
+          x="430" y="90" width="680" height="275" rx="22"/>
     <text class="boundary-label"
-          x="368" y="85">organization 1</text>
+          x="448" y="115">organisation 1</text>
   </g>
   <g>
     <rect class="tee"
-          x="450" y="102.0" width="320" height="156" rx="18"/>
+          x="470" y="130" width="340" height="180" rx="18"/>
 
     <path class="lock"
-          d="M 470,130.0
-             V 123.0
-             C 470,112.0
-               486,112.0
-               486,123.0
-             V 130.0"/>
+          d="M 490,158
+             V 151
+             C 490,140
+               506,140
+               506,151
+             V 158"/>
 
-    <rect x="467" y="129.0"
+    <rect x="487" y="157"
           width="22" height="17" rx="3"
           fill="#218c69"/>
 
-    <circle cx="478" cy="137.0"
+    <circle cx="498" cy="165"
             r="2.3" fill="#ffffff"/>
 
     <text class="small-label"
-          x="499" y="136.0">TEE</text>
+          x="519" y="164">TEE</text>
   </g>
   <g>
     <rect class="organization"
-          x="350" y="330" width="760" height="240" rx="22"/>
+          x="430" y="405" width="680" height="275" rx="22"/>
     <text class="boundary-label"
-          x="368" y="355">organization 2</text>
+          x="448" y="430">organisation 2</text>
   </g>
   <g>
     <rect class="tee"
-          x="450" y="372.0" width="320" height="156" rx="18"/>
+          x="470" y="450" width="340" height="180" rx="18"/>
 
     <path class="lock"
-          d="M 470,400.0
-             V 393.0
-             C 470,382.0
-               486,382.0
-               486,393.0
-             V 400.0"/>
+          d="M 490,478
+             V 471
+             C 490,460
+               506,460
+               506,471
+             V 478"/>
 
-    <rect x="467" y="399.0"
+    <rect x="487" y="477"
           width="22" height="17" rx="3"
           fill="#218c69"/>
 
-    <circle cx="478" cy="407.0"
+    <circle cx="498" cy="485"
             r="2.3" fill="#ffffff"/>
 
     <text class="small-label"
-          x="499" y="406.0">TEE</text>
-  </g>
-  <g>
-    <rect class="organization"
-          x="350" y="600" width="760" height="240" rx="22"/>
-    <text class="boundary-label"
-          x="368" y="625">organization 3</text>
+          x="519" y="484">TEE</text>
   </g>
   <g>
     <rect class="tee"
-          x="450" y="642.0" width="320" height="156" rx="18"/>
+          x="1180" y="270" width="300" height="300" rx="18"/>
 
     <path class="lock"
-          d="M 470,670.0
-             V 663.0
-             C 470,652.0
-               486,652.0
-               486,663.0
-             V 670.0"/>
+          d="M 1200,298
+             V 291
+             C 1200,280
+               1216,280
+               1216,291
+             V 298"/>
 
-    <rect x="467" y="669.0"
+    <rect x="1197" y="297"
           width="22" height="17" rx="3"
           fill="#218c69"/>
 
-    <circle cx="478" cy="677.0"
+    <circle cx="1208" cy="305"
             r="2.3" fill="#ffffff"/>
 
     <text class="small-label"
-          x="499" y="676.0">TEE</text>
+          x="1229" y="304">TEE</text>
   </g>
-  <g>
-    <rect class="tee"
-          x="1200" y="350" width="300" height="200" rx="18"/>
-
-    <path class="lock"
-          d="M 1220,378
-             V 371
-             C 1220,360
-               1236,360
-               1236,371
-             V 378"/>
-
-    <rect x="1217" y="377"
-          width="22" height="17" rx="3"
-          fill="#218c69"/>
-
-    <circle cx="1228" cy="385"
-            r="2.3" fill="#ffffff"/>
-
-    <text class="small-label"
-          x="1249" y="384">TEE</text>
-  </g>
-  <path class="edge" d="M 248,135 C 335,135 405,169 492,169" marker-end="url(#arrow)"/>
-  <g transform="translate(350 154.7)">
+  <path class="edge" d="M 245,170 C 335,170 405,205 522,205" marker-end="url(#arrow)"/>
+  <g transform="translate(365 186.4)">
     <rect class="tls-badge" x="-34" y="-13" width="68" height="26" rx="13"/>
     <path d="M -21,-2 V -6
              C -21,-12 -11,-12 -11,-6
@@ -333,8 +341,8 @@
           fill="#7456c7"/>
     <text class="tls-text" x="11" y="1">TLS</text>
   </g>
-  <path class="edge" d="M 248,225 C 335,225 405,191 492,191" marker-end="url(#arrow)"/>
-  <g transform="translate(350 205.3)">
+  <path class="edge" d="M 245,270 C 335,270 405,235 522,235" marker-end="url(#arrow)"/>
+  <g transform="translate(365 253.6)">
     <rect class="tls-badge" x="-34" y="-13" width="68" height="26" rx="13"/>
     <path d="M -21,-2 V -6
              C -21,-12 -11,-12 -11,-6
@@ -349,8 +357,8 @@
           fill="#7456c7"/>
     <text class="tls-text" x="11" y="1">TLS</text>
   </g>
-  <path class="edge" d="M 248,405 C 335,405 405,439 492,439" marker-end="url(#arrow)"/>
-  <g transform="translate(350 424.7)">
+  <path class="edge" d="M 245,490 C 335,490 405,525 522,525" marker-end="url(#arrow)"/>
+  <g transform="translate(365 506.4)">
     <rect class="tls-badge" x="-34" y="-13" width="68" height="26" rx="13"/>
     <path d="M -21,-2 V -6
              C -21,-12 -11,-12 -11,-6
@@ -365,8 +373,8 @@
           fill="#7456c7"/>
     <text class="tls-text" x="11" y="1">TLS</text>
   </g>
-  <path class="edge" d="M 248,495 C 335,495 405,461 492,461" marker-end="url(#arrow)"/>
-  <g transform="translate(350 475.3)">
+  <path class="edge" d="M 245,590 C 335,590 405,555 522,555" marker-end="url(#arrow)"/>
+  <g transform="translate(365 573.5)">
     <rect class="tls-badge" x="-34" y="-13" width="68" height="26" rx="13"/>
     <path d="M -21,-2 V -6
              C -21,-12 -11,-12 -11,-6
@@ -381,136 +389,97 @@
           fill="#7456c7"/>
     <text class="tls-text" x="11" y="1">TLS</text>
   </g>
-  <path class="edge" d="M 248,675 C 335,675 405,709 492,709" marker-end="url(#arrow)"/>
-  <g transform="translate(350 694.7)">
-    <rect class="tls-badge" x="-34" y="-13" width="68" height="26" rx="13"/>
-    <path d="M -21,-2 V -6
-             C -21,-12 -11,-12 -11,-6
-             V -2"
-          fill="none"
-          stroke="#7456c7"
-          stroke-width="1.5"
-          stroke-linecap="round"/>
-    <rect x="-22.5" y="-3"
-          width="13" height="10"
-          rx="2"
-          fill="#7456c7"/>
-    <text class="tls-text" x="11" y="1">TLS</text>
-  </g>
-  <path class="edge" d="M 248,765 C 335,765 405,731 492,731" marker-end="url(#arrow)"/>
-  <g transform="translate(350 745.3)">
-    <rect class="tls-badge" x="-34" y="-13" width="68" height="26" rx="13"/>
-    <path d="M -21,-2 V -6
-             C -21,-12 -11,-12 -11,-6
-             V -2"
-          fill="none"
-          stroke="#7456c7"
-          stroke-width="1.5"
-          stroke-linecap="round"/>
-    <rect x="-22.5" y="-3"
-          width="13" height="10"
-          rx="2"
-          fill="#7456c7"/>
-    <text class="tls-text" x="11" y="1">TLS</text>
-  </g>
-  <path class="edge-local" d="M 742,192 C 790,195 805,226 806,231" marker-end="url(#arrow-local)"/>
-  <path class="edge-local" d="M 742,462 C 790,465 805,496 806,501" marker-end="url(#arrow-local)"/>
-  <path class="edge-local" d="M 742,732 C 790,735 805,766 806,771" marker-end="url(#arrow-local)"/>
-  <path class="edge" d="M 1025,235 C 1190,235 1380,285 1510,330 L 1572,404" marker-end="url(#arrow)"/>
-  <path class="edge" d="M 1025,505 C 1100,505 1125,610 1200,625 H 1440 C 1500,625 1515,520 1548,465" marker-end="url(#arrow)"/>
-  <path class="edge" d="M 1025,775 C 1220,775 1410,665 1510,570 L 1550,512" marker-end="url(#arrow)"/>
-  <path class="edge-publication" d="M 742,170 H 1080 C 1165,170 1175,405 1236,425" marker-end="url(#arrow-publication)"/>
-  <path class="edge-publication" d="M 742,440 H 1080 C 1150,440 1190,450 1235,450" marker-end="url(#arrow-publication)"/>
-  <path class="edge-publication" d="M 742,710 H 1080 C 1165,710 1175,495 1236,475" marker-end="url(#arrow-publication)"/>
-  <path class="edge-publication" d="M 1465,450 C 1500,450 1518,450 1542,450" marker-end="url(#arrow-publication)"/>
+  <path class="edge-local" d="M 770,198 C 795,188 807,166 829,158" marker-end="url(#arrow-local)"/>
+  <path class="edge-local" d="M 770,562 C 795,573 807,599 829,607" marker-end="url(#arrow-local)"/>
+  <path class="edge-publication" d="M 780,220 C 935,220 1060,255 1145,342 C 1170,368 1192,387 1218,395" marker-end="url(#arrow-publication)"/>
+  <path class="edge-publication" d="M 780,540 C 935,540 1060,515 1145,483 C 1172,473 1193,453 1218,445" marker-end="url(#arrow-publication)"/>
+  <path class="edge" d="M 1035,150 C 1100,150 1120,82 1210,82 H 1445 C 1510,82 1542,275 1609,381" marker-end="url(#arrow)"/>
+  <path class="edge" d="M 1035,610 C 1100,610 1120,830 1210,830 H 1445 C 1510,830 1542,585 1592,490" marker-end="url(#arrow)"/>
+  <path class="edge-publication" d="M 1445,420 C 1490,420 1525,428 1563,433" marker-end="url(#arrow-publication)"/>
   <g>
     <ellipse class="node wallet"
-             cx="160" cy="135" rx="88" ry="34"/>
-    <text class="node-label" x="160" y="135">wallet</text>
+             cx="150" cy="170" rx="95" ry="36"/>
+    <text class="node-label" x="150" y="170">wallet</text>
   </g>
   <g>
     <ellipse class="node wallet"
-             cx="160" cy="225" rx="88" ry="34"/>
-    <text class="node-label" x="160" y="225">wallet</text>
+             cx="150" cy="270" rx="95" ry="36"/>
+    <text class="node-label" x="150" y="270">wallet</text>
   </g>
   <g>
     <ellipse class="node shim"
-             cx="620" cy="180" rx="125" ry="42"/>
-    <text class="node-label" x="620" y="180">zero-indexer-shim</text>
+             cx="650" cy="220" rx="130" ry="44"/>
+    <text class="node-label" x="650" y="220">zero-indexer-shim</text>
   </g>
   <g>
     <ellipse class="node indexer"
-             cx="920" cy="235" rx="105" ry="40"/>
-    <text class="node-label" x="920" y="235">indexer</text>
+             cx="930" cy="150" rx="105" ry="40"/>
+    <text class="node-label" x="930" y="150">indexer</text>
   </g>
   <g>
     <ellipse class="node wallet"
-             cx="160" cy="405" rx="88" ry="34"/>
-    <text class="node-label" x="160" y="405">wallet</text>
+             cx="150" cy="490" rx="95" ry="36"/>
+    <text class="node-label" x="150" y="490">wallet</text>
   </g>
   <g>
     <ellipse class="node wallet"
-             cx="160" cy="495" rx="88" ry="34"/>
-    <text class="node-label" x="160" y="495">wallet</text>
+             cx="150" cy="590" rx="95" ry="36"/>
+    <text class="node-label" x="150" y="590">wallet</text>
   </g>
   <g>
     <ellipse class="node shim"
-             cx="620" cy="450" rx="125" ry="42"/>
-    <text class="node-label" x="620" y="450">zero-indexer-shim</text>
+             cx="650" cy="540" rx="130" ry="44"/>
+    <text class="node-label" x="650" y="540">zero-indexer-shim</text>
   </g>
   <g>
     <ellipse class="node indexer"
-             cx="920" cy="505" rx="105" ry="40"/>
-    <text class="node-label" x="920" y="505">indexer</text>
-  </g>
-  <g>
-    <ellipse class="node wallet"
-             cx="160" cy="675" rx="88" ry="34"/>
-    <text class="node-label" x="160" y="675">wallet</text>
-  </g>
-  <g>
-    <ellipse class="node wallet"
-             cx="160" cy="765" rx="88" ry="34"/>
-    <text class="node-label" x="160" y="765">wallet</text>
-  </g>
-  <g>
-    <ellipse class="node shim"
-             cx="620" cy="720" rx="125" ry="42"/>
-    <text class="node-label" x="620" y="720">zero-indexer-shim</text>
-  </g>
-  <g>
-    <ellipse class="node indexer"
-             cx="920" cy="775" rx="105" ry="40"/>
-    <text class="node-label" x="920" y="775">indexer</text>
+             cx="930" cy="610" rx="105" ry="40"/>
+    <text class="node-label" x="930" y="610">indexer</text>
   </g>
   <g>
     <ellipse class="node hub"
-             cx="1355" cy="450" rx="110" ry="48"/>
-    <text class="node-label" x="1355" y="450">zero-indexer-hub</text>
+             cx="1330" cy="420" rx="115" ry="48"/>
+    <text class="node-label" x="1330" y="420">zero-indexer-hub</text>
   </g>
   <g>
-    <path class="cloud" d="M 1581.2,514.0 C 1544.3,514.0 1534.1,486.0 1552.5,458.0 C 1538.2,424.0 1566.9,396.0 1597.7,408.0 C 1610.0,366.0 1661.2,364.0 1677.6,406.0 C 1714.5,398.0 1730.9,430.0 1716.5,460.0 C 1739.1,488.0 1712.5,516.0 1683.8,512.0 L 1581.2,514.0 Z"/>
+    <path class="cloud" d="M 1592.5,492.2 C 1554.7,492.2 1544.2,462.8 1563.1,433.4 C 1548.4,397.7 1577.8,368.3 1609.3,380.9 C 1621.9,336.8 1674.4,334.7 1691.2,378.8 C 1729.0,370.4 1745.8,404.0 1731.1,435.5 C 1754.2,464.9 1726.9,494.3 1697.5,490.1 L 1592.5,492.2 Z"/>
     <text class="node-label"
-          x="1636.6" y="462.0">mempool</text>
+          x="1649.2" y="437.6">mempool</text>
+  </g>
+  <g aria-label="more">
+    <circle class="continuation-dot"
+            cx="150" cy="735" r="4.5"/>
+    <circle class="continuation-dot"
+            cx="150" cy="757" r="4.5"/>
+    <circle class="continuation-dot"
+            cx="150" cy="779" r="4.5"/>
+  </g>
+  <g aria-label="more">
+    <circle class="continuation-dot"
+            cx="930" cy="735" r="4.5"/>
+    <circle class="continuation-dot"
+            cx="930" cy="757" r="4.5"/>
+    <circle class="continuation-dot"
+            cx="930" cy="779" r="4.5"/>
   </g>
   <g>
     <ellipse class="eye"
-             cx="1326" cy="755"
+             cx="1296" cy="700"
              rx="26" ry="38"
-             transform="rotate(-5 1326 755)"/>
+             transform="rotate(-5 1296 700)"/>
 
     <ellipse class="eye"
-             cx="1384" cy="755"
+             cx="1354" cy="700"
              rx="26" ry="38"
-             transform="rotate(5 1384 755)"/>
+             transform="rotate(5 1354 700)"/>
 
-    <circle class="pupil" cx="1334" cy="758" r="10"/>
-    <circle class="pupil" cx="1392" cy="758" r="10"/>
+    <circle class="pupil" cx="1304" cy="703" r="10"/>
+    <circle class="pupil" cx="1362" cy="703" r="10"/>
 
-    <circle class="highlight" cx="1338" cy="754" r="3"/>
-    <circle class="highlight" cx="1396" cy="754" r="3"/>
+    <circle class="highlight" cx="1308" cy="699" r="3"/>
+    <circle class="highlight" cx="1366" cy="699" r="3"/>
 
     <text class="auditor-label"
-          x="1355" y="822">zero-indexer-auditor</text>
+          x="1325" y="767">zero-indexer-auditor</text>
   </g>
 </svg>
