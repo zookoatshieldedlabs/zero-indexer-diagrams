@@ -6,7 +6,7 @@
      role="img"
      aria-labelledby="svg-title svg-desc">
   <title id="svg-title">Zero-indexer transaction publication</title>
-  <desc id="svg-desc">Wallet TLS connections terminate at zero-indexer shims inside trusted execution environments. The shims connect to one hub, which publishes to the mempool. An auditor watches independently.</desc>
+  <desc id="svg-desc">Wallet TLS connections terminate at zero-indexer shims inside trusted execution environments. The shims connect to a hub in another trusted execution environment. Both the hub and the indexers publish to the mempool.</desc>
 
   <defs>
     <style>
@@ -295,6 +295,28 @@
     <text class="small-label"
           x="499" y="676.0">TEE</text>
   </g>
+  <g>
+    <rect class="tee"
+          x="1200" y="350" width="300" height="200" rx="18"/>
+
+    <path class="lock"
+          d="M 1220,378
+             V 371
+             C 1220,360
+               1236,360
+               1236,371
+             V 378"/>
+
+    <rect x="1217" y="377"
+          width="22" height="17" rx="3"
+          fill="#218c69"/>
+
+    <circle cx="1228" cy="385"
+            r="2.3" fill="#ffffff"/>
+
+    <text class="small-label"
+          x="1249" y="384">TEE</text>
+  </g>
   <path class="edge" d="M 248,135 C 335,135 405,169 492,169" marker-end="url(#arrow)"/>
   <g transform="translate(350 154.7)">
     <rect class="tls-badge" x="-34" y="-13" width="68" height="26" rx="13"/>
@@ -394,6 +416,9 @@
   <path class="edge-local" d="M 742,192 C 790,195 805,226 806,231" marker-end="url(#arrow-local)"/>
   <path class="edge-local" d="M 742,462 C 790,465 805,496 806,501" marker-end="url(#arrow-local)"/>
   <path class="edge-local" d="M 742,732 C 790,735 805,766 806,771" marker-end="url(#arrow-local)"/>
+  <path class="edge" d="M 1025,235 C 1190,235 1380,285 1510,330 L 1572,404" marker-end="url(#arrow)"/>
+  <path class="edge" d="M 1025,505 C 1100,505 1125,610 1200,625 H 1440 C 1500,625 1515,520 1548,465" marker-end="url(#arrow)"/>
+  <path class="edge" d="M 1025,775 C 1220,775 1410,665 1510,570 L 1550,512" marker-end="url(#arrow)"/>
   <path class="edge-publication" d="M 742,170 H 1080 C 1165,170 1175,405 1236,425" marker-end="url(#arrow-publication)"/>
   <path class="edge-publication" d="M 742,440 H 1080 C 1150,440 1190,450 1235,450" marker-end="url(#arrow-publication)"/>
   <path class="edge-publication" d="M 742,710 H 1080 C 1165,710 1175,495 1236,475" marker-end="url(#arrow-publication)"/>

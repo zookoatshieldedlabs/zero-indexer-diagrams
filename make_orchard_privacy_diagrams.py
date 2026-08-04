@@ -497,14 +497,19 @@ def make_zero_indexer_diagram():
     organization_width = 760
     organization_height = 240
 
-    tee_x = 450
-    tee_width = 320
-    tee_height = 156
+    shim_tee_x = 450
+    shim_tee_width = 320
+    shim_tee_height = 156
 
     hub_x = 1355
     hub_y = 450
 
-    # Organizational and TEE boundaries go behind everything else.
+    hub_tee_x = 1200
+    hub_tee_y = 350
+    hub_tee_width = 300
+    hub_tee_height = 200
+
+    # Organizational boundaries and shim TEE enclaves.
     for number, row_y in enumerate(rows, start=1):
         elements.append(
             organization_boundary(
@@ -518,14 +523,24 @@ def make_zero_indexer_diagram():
 
         elements.append(
             tee_boundary(
-                tee_x,
-                row_y - tee_height / 2,
-                tee_width,
-                tee_height,
+                shim_tee_x,
+                row_y - shim_tee_height / 2,
+                shim_tee_width,
+                shim_tee_height,
             )
         )
 
-    # Wallet-to-shim TLS connections. Each endpoint lies inside the TEE.
+    # Locked TEE enclave containing the shared hub.
+    elements.append(
+        tee_boundary(
+            hub_tee_x,
+            hub_tee_y,
+            hub_tee_width,
+            hub_tee_height,
+        )
+    )
+
+    # Wallet-to-shim TLS connections. Each TLS endpoint is inside a TEE.
     for row_y in rows:
         wallet_ys = [row_y - 45, row_y + 45]
         target_ys = [row_y - 11, row_y + 11]
@@ -557,8 +572,38 @@ def make_zero_indexer_diagram():
             )
         )
 
-    # Every shim connects to the single hub.
-    publication_paths = [
+    # Preserve the direct indexer-to-mempool publication paths.
+    # These are routed around the hub's TEE boundary.
+    direct_indexer_paths = [
+        (
+            "M 1025,235 "
+            "C 1190,235 1380,285 1510,330 "
+            "L 1572,404"
+        ),
+        (
+            "M 1025,505 "
+            "C 1100,505 1125,610 1200,625 "
+            "H 1440 "
+            "C 1500,625 1515,520 1548,465"
+        ),
+        (
+            "M 1025,775 "
+            "C 1220,775 1410,665 1510,570 "
+            "L 1550,512"
+        ),
+    ]
+
+    for path in direct_indexer_paths:
+        elements.append(
+            edge(
+                path,
+                css_class="edge",
+                marker="arrow",
+            )
+        )
+
+    # Every shim also connects to the single hub inside its TEE.
+    shim_to_hub_paths = [
         (
             f"M 742,{rows[0] - 10} "
             f"H 1080 "
@@ -576,7 +621,7 @@ def make_zero_indexer_diagram():
         ),
     ]
 
-    for path in publication_paths:
+    for path in shim_to_hub_paths:
         elements.append(
             edge(
                 path,
@@ -585,7 +630,7 @@ def make_zero_indexer_diagram():
             )
         )
 
-    # Hub-to-mempool connection.
+    # Hub-to-mempool publication path exits the hub's TEE.
     elements.append(
         edge(
             "M 1465,450 C 1500,450 1518,450 1542,450",
@@ -630,7 +675,7 @@ def make_zero_indexer_diagram():
             )
         )
 
-    # Shared hub and mempool.
+    # Shared hub, enclosed by the hub TEE drawn earlier.
     elements.append(
         ellipse_node(
             hub_x,
@@ -644,7 +689,7 @@ def make_zero_indexer_diagram():
 
     elements.append(cloud(1530, 350, 205, 200))
 
-    # Disconnected auditor.
+    # Independent, disconnected auditor.
     elements.append(auditor_eyes(1355, 755))
 
     return svg_document(
@@ -652,8 +697,9 @@ def make_zero_indexer_diagram():
         height,
         "Zero-indexer transaction publication",
         "Wallet TLS connections terminate at zero-indexer shims inside "
-        "trusted execution environments. The shims connect to one hub, "
-        "which publishes to the mempool. An auditor watches independently.",
+        "trusted execution environments. The shims connect to a hub in "
+        "another trusted execution environment. Both the hub and the "
+        "indexers publish to the mempool.",
         elements,
     )
 
